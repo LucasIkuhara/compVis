@@ -28,13 +28,13 @@ while(True):
     #ret is a boolean which acts a flag regarding whether read() was successful
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-    #cv2.imshow("Input Video", frame)
-    #cv2.imshow("Grayscale Video", gray)
+    cv2.imshow("Input Video", frame)
+    cv2.imshow("Grayscale Video", gray)
     
     filtered = cv2.filter2D(gray, -1, Kernel1)
-    cv2.imshow("Kernel 1 Video", filtered)
+    cv2.imshow("Gaussian Blur Video", filtered)
     filtered = cv2.filter2D(gray, -1, Kernel2)
-    cv2.imshow("Kernel 2 Video", filtered)
+    cv2.imshow("Gauss B. + Sobel Video", filtered)
 
     FPS += 1
 
