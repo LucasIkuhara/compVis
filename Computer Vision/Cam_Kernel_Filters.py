@@ -19,6 +19,8 @@ Kernel2 = np.array([(-1, -1, -1),
                     (-1,  8, -1), 
                     (-1, -1, -1)])
 
+LT, UT = int(input("Lower Threshold:")), int(input("Upper Threshold:"))
+
 while(True):
     if t.time() > lastSec+1:
         lastSec = t.time()
@@ -35,6 +37,9 @@ while(True):
     cv2.imshow("Gaussian Blur Video", filtered)
     filtered = cv2.filter2D(gray, -1, Kernel2)
     cv2.imshow("Gauss B. + Sobel Video", filtered)
+
+    filtered = cv2.Canny(filtered, LT, UT)
+    cv2.imshow("Canny", filtered)
 
     FPS += 1
 
