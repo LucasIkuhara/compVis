@@ -1,6 +1,7 @@
 import torch as tc
 import torch.nn as nn
 import torch.nn.functional as fn
+from champion_dictionary import champions
 
 class NN(nn.Module):
     def __init__(self):
@@ -19,7 +20,7 @@ class NN(nn.Module):
 
         return fn.log_softmax(result, dim=1)
 
-heroes = {'Zac':1}
 
 Network = NN()
 print(Network)
+
