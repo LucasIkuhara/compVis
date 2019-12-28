@@ -1,4 +1,5 @@
 from selenium import webdriver
+from bs4 import BeautifulSoup
 import time
 
 driver = webdriver.Chrome(r"C:\Users\Lucas Ikuhara\Pictures\testzone\pyTorch\chromedriver.exe")
