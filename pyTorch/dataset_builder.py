@@ -25,16 +25,22 @@ def get_data(source_link):
     return str(champList)[1:-1]
 
 
+#Load links
+print("Opennig 'links.txt'...")
 file = open(r"C:\Users\Lucas Ikuhara\Pictures\testzone\pyTorch\links.txt", "r")
 links = file.read().splitlines() 
+responses =[]
+iterations = 0
 
-data =[]
+#Make requests
 for link in links:
-    data.append(get_data(link).replace("'",""))
+    responses.append(get_data(link).replace("'",""))
+    iterations += 1
+    print("Link: ", iterations)
 
-print(data)
+#Log responses to a csv file
 csv = open("probuilds_data.csv", "w")
-for line in data:
+for line in responses:
     csv.write(line)
     csv.write("\n")
 csv.flush()

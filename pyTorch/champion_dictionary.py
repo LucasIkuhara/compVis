@@ -147,3 +147,5 @@ champions = {
 "Zoe" : 145,
 "Zyra" : 146
 }
+
+def nameToIndex()

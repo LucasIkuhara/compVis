@@ -1,7 +1,7 @@
 import torch as tc
 import torch.nn as nn
 import torch.nn.functional as fn
-from champion_dictionary import champions
+
 
 class NN(nn.Module):
     def __init__(self):
