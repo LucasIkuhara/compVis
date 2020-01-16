@@ -18,7 +18,7 @@ class NN(nn.Module):
         result = fn.relu(self.hidden_layer2(data))
         result = self.output_layer(data)
 
-        return fn.log_softmax(result, dim=1)
+        return fn.sigmoid(result, dim=1)
 
 
 Network = NN()

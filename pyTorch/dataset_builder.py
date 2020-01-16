@@ -27,19 +27,23 @@ def get_data(source_link):
 
 #Load links
 print("Opennig 'links.txt'...")
-file = open(r"C:\Users\Lucas Ikuhara\Pictures\testzone\pyTorch\links.txt", "r")
+file = open("links.txt", "r")
 links = file.read().splitlines() 
 responses =[]
 iterations = 0
 
 #Make requests
 for link in links:
-    responses.append(get_data(link).replace("'",""))
+    data = get_data(link)
+    data = data.replace("'","")
+    data = data.replace(" ","")
+    responses.append(data)
     iterations += 1
     print("Link: ", iterations)
 
 #Log responses to a csv file
 csv = open("probuilds_data.csv", "w")
+csv.write("BTC1,BTC2,BTC3,BTC4,BTC5,RTC1,RTC2,RTC3,RTC4,RTC5,WIN\n")
 for line in responses:
     csv.write(line)
     csv.write("\n")
