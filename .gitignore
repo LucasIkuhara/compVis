@@ -3,3 +3,5 @@ __pycache__/
 pyTorch/probuilds_data.csv
 .vscode/settings.json
 .vscode/
+pyTorch/__pycache__/champion_dictionary.cpython-37.pyc
+.pyc

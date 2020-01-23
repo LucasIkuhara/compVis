@@ -21,4 +21,5 @@ data = data.applymap(translateEntries)
 #Output data
 print("\n\n", data.head(3))
 data.head()
-data.to_csv("treated_dataset.csv")
+data.to_csv("treated_dataset.csv", index=False)
+print("output: treated_dataset.csv")
