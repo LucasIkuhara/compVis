@@ -43,11 +43,20 @@ dataset2 = tc.rand((1, 10))
 
 print(dataset)
 print(dataset2)
-Network = NN()
+network = NN()
 
 #Declaring optimizer
-#optimizer = optim.Adam( )
-
+optimizer = optim.Adam(network.parameters(), lr=0.01)
+Epochs = 5
+for epoch in range(Epochs):
+    for data in trainset:
+        X, y = data
+        network.zero_grad()
+        output = network(X.view(-1, 10))
+        loss = fn.nll_loss(output, y)
+        loss.backward()
+        optimizer.step()
+    print("loss:", loss)
 
 #REDUCTION MODEL 
 #Based on the models of Generative Adversarial Networks, one must wonder if it's 
