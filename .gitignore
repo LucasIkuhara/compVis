@@ -5,3 +5,4 @@ pyTorch/probuilds_data.csv
 .vscode/
 pyTorch/__pycache__/champion_dictionary.cpython-37.pyc
 .pyc
+.vscode/settings.json
