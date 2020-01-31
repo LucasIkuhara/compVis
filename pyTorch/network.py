@@ -2,6 +2,7 @@ import torch as tc
 import torch.nn as nn
 import torch.nn.functional as fn
 import numpy as np
+import pandas as pd
 import torch.optim as optim
 
 class NN(nn.Module):
@@ -21,42 +22,32 @@ class NN(nn.Module):
 
 
 #Loading the dataset
-raw_data = open("treated_dataset.csv", 'r').read().splitlines()
-del raw_data[0]
+raw_data = pd.read_csv("treated_dataset.csv", 'r')
+print(raw_data.iloc[0][0])
 
-#Formating values to integer
-for i in range (len(raw_data)):
-    raw_data[i] = raw_data[i].split(",")
-    del raw_data[i][0]
-    for k in range(len(raw_data[i])):
-        try:
-            raw_data[i][k] = int(raw_data[i][k])
-        except:
-            print(i)
+# print(raw_data[0])
+# dataset = tc.tensor(raw_data[1])
+# dataset2 = tc.rand((1, 10))
 
-print(raw_data[0])
-dataset = tc.tensor(raw_data[1])
-dataset2 = tc.rand((1, 10))
+# #dataset = dataset.view(-1, 10)
+# #dataset2 = dataset2.view(-1, 10)
 
-#dataset = dataset.view(-1, 10)
-#dataset2 = dataset2.view(-1, 10)
+# print(dataset)
+# print(dataset2)
+# network = NN()
 
-print(dataset)
-print(dataset2)
-network = NN()
-
-#Declaring optimizer
-optimizer = optim.Adam(network.parameters(), lr=0.01)
-Epochs = 5
-for epoch in range(Epochs):
-    for data in trainset:
-        X, y = data
-        network.zero_grad()
-        output = network(X.view(-1, 10))
-        loss = fn.nll_loss(output, y)
-        loss.backward()
-        optimizer.step()
-    print("loss:", loss)
+# #Declaring optimizer
+# optimizer = optim.Adam(network.parameters(), lr=0.01)
+# Epochs = 5
+# for epoch in range(Epochs):
+#     for data in trainset:
+#         X, y = data
+#         network.zero_grad()
+#         output = network(X.view(-1, 10))
+#         loss = fn.nll_loss(output, y)
+#         loss.backward()
+#         optimizer.step()
+#     print("loss:", loss)
 
 #REDUCTION MODEL 
 #Based on the models of Generative Adversarial Networks, one must wonder if it's 
