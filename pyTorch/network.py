@@ -4,6 +4,7 @@ import torch.nn.functional as fn
 import numpy as np
 import pandas as pd
 import torch.optim as optim
+from sklearn.model_selection import train_test_split 
 
 class NN(nn.Module):
     def __init__(self):
@@ -22,32 +23,31 @@ class NN(nn.Module):
 
 
 #Loading the dataset
-raw_data = pd.read_csv("treated_dataset.csv", 'r')
-print(raw_data.iloc[0][0])
+raw_data_x = pd.read_csv("treated_dataset.csv")
+print(raw_data_x.tail(5))
+print(raw_data_x.columns)
+raw_data_x["BTC1"]
+raw_data_y = pd.read_csv("treated_dataset.csv")
+raw_data_x.drop("WIN", axis=1)
+raw_data_y = raw_data_y.filter('WIN', axis=1)
 
-# print(raw_data[0])
-# dataset = tc.tensor(raw_data[1])
-# dataset2 = tc.rand((1, 10))
 
-# #dataset = dataset.view(-1, 10)
-# #dataset2 = dataset2.view(-1, 10)
+x_train, x_test, y_train, y_test = train_test_split(raw_data_x, raw_data_y, test_size=0.2, random_state=123)
 
-# print(dataset)
-# print(dataset2)
-# network = NN()
+network = NN()
 
-# #Declaring optimizer
-# optimizer = optim.Adam(network.parameters(), lr=0.01)
-# Epochs = 5
-# for epoch in range(Epochs):
-#     for data in trainset:
-#         X, y = data
-#         network.zero_grad()
-#         output = network(X.view(-1, 10))
-#         loss = fn.nll_loss(output, y)
-#         loss.backward()
-#         optimizer.step()
-#     print("loss:", loss)
+#Declaring optimizer
+optimizer = optim.Adam(network.parameters(), lr=0.01)
+Epochs = 5
+for epoch in range(Epochs):
+    for data in x_train:
+        x_train, y_train = data
+        network.zero_grad()
+        output = network(X.view(-1, 10))
+        loss = fn.nll_loss(output, y)
+        loss.backward()
+        optimizer.step()
+    print("loss:", loss)
 
 #REDUCTION MODEL 
 #Based on the models of Generative Adversarial Networks, one must wonder if it's 
