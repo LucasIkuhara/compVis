@@ -37,6 +37,7 @@ for link in links:
     data = get_data(link)
     data = data.replace("'","")
     data = data.replace(" ","")
+    data = data.replace('"',"")
     responses.append(data)
     iterations += 1
     print("Link: ", iterations)

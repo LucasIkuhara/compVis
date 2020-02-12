@@ -24,30 +24,38 @@ class NN(nn.Module):
 
 #Loading the dataset
 raw_data_x = pd.read_csv("treated_dataset.csv")
-print(raw_data_x.tail(5))
-print(raw_data_x.columns)
 raw_data_x["BTC1"]
 raw_data_y = pd.read_csv("treated_dataset.csv")
-raw_data_x.drop("WIN", axis=1)
-raw_data_y = raw_data_y.filter('WIN', axis=1)
-
+raw_data_x = raw_data_x.drop("WIN", axis=1)
+raw_data_y = raw_data_y["WIN"]
 
 x_train, x_test, y_train, y_test = train_test_split(raw_data_x, raw_data_y, test_size=0.2, random_state=123)
+x_train = tc.tensor(x_train.values, dtype=tc.float)
+x_test = tc.tensor(x_test.values, dtype=tc.float)
+y_train = tc.tensor(y_train.values, dtype=tc.long)
+y_test = tc.tensor(y_test.values, dtype=tc.long)
 
+# print(x_train)
+# print(y_train)
+
+#Declaring network and optimizer
+print("Initializing network")
 network = NN()
-
-#Declaring optimizer
 optimizer = optim.Adam(network.parameters(), lr=0.01)
 Epochs = 5
+
 for epoch in range(Epochs):
-    for data in x_train:
-        x_train, y_train = data
+    for count in range(len(x_train)):
         network.zero_grad()
-        output = network(X.view(-1, 10))
-        loss = fn.nll_loss(output, y)
+        output = network(x_train[count].view(-1, 10))
+        print(output)
+        print(y_train[count].view(1))
+        loss = fn.nll_loss(output, y_train[count].view(-1))
         loss.backward()
         optimizer.step()
     print("loss:", loss)
+
+
 
 #REDUCTION MODEL 
 #Based on the models of Generative Adversarial Networks, one must wonder if it's 
