@@ -7,12 +7,13 @@ n = int(int(input("How many games should be fetched (Approx): "))/10)
 maxFailedAttempts = int(input("Fail tolerance: "))
 
 #Driver declaration
-driver = webdriver.Chrome(r"C:\Users\Lucas Ikuhara\Pictures\testzone\pyTorch\chromedriver.exe")
+driver = webdriver.Chrome(r"C:\Users\Lucas Ikuhara\Pictures\Summer2020\pyTorch\chromedriver.exe")
 driver.get('https://www.probuilds.net/')
 
 #Hit 'View More' button
 failedAttempts = 0
 for i in range(n):
+    print("{} of {} iterations".format(i+1, n))
     if failedAttempts > maxFailedAttempts:
         break
     try:
