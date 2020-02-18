@@ -1,11 +1,13 @@
 import torch as tc
-from network import NN
+from model import NN
+from champion_dictionary import *
 
 net = NN()
-net.load_state_dict("model.wab")
+net.load_state_dict(tc.load("model.wab"))
 
-input_data = tc.rand(10)
+input_data = tc.rand((10), dtype=tc.float)
 out = net(input_data)
+print(input_data)
 
 if out < 0.5:
     print("Blue team")

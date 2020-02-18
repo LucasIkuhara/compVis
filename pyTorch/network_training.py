@@ -6,21 +6,7 @@ import pandas as pd
 import torch.optim as optim
 from sklearn.model_selection import train_test_split 
 from torch.utils.data import Dataset, DataLoader
-
-class NN(nn.Module):
-    def __init__(self):
-        nn.Module.__init__(self)
-        self.input_layer = nn.Linear(10, 15)
-        self.hidden_layer1 = nn.Linear(15, 15)
-        self.output_layer = nn.Linear(15, 1) #OUT = Chance ot teanm 1 winning the game
-
-    def forward(self, data):
-        result = fn.relu(self.input_layer(data))
-        result = fn.relu(self.hidden_layer1(result))
-        result = self.output_layer(result)
-        result = tc.sigmoid(result)
-     
-        return result
+from model import NN
 
 
 #Loading the dataset
@@ -57,20 +43,20 @@ train_loader = DataLoader(dataset=dataset, batch_size=32, shuffle=True, num_work
 #Declaring network and optimizer
 print("Initializing network")
 network = NN()
-optimizer = optim.Adam(network.parameters(), lr=0.1)
+optimizer = optim.Adam(network.parameters(), lr=0.0005)
 criterion = nn.BCELoss(reduction='mean')
-
+correct = 0
 
 for epoch in range(5):
     for i, data in enumerate(train_loader, 0):
         # get the inputs
         inputs, labels = data
-
+       
         # Forward pass: Compute predicted y by passing x to the model
         y_pred = network(inputs)
-
+    
         # Compute and print loss
-        loss = criterion(y_pred, labels)
+        loss = criterion(y_pred, labels.view((-1, 1)))
         print(f'Epoch {epoch + 1} | Batch: {i+1} | Loss: {loss.item():.4f}')
 
         # Zero gradients, perform a backward pass, and update the weights.
