@@ -33,9 +33,9 @@ raw_data_y = raw_data_y["WIN"]
 class Data(Dataset):
 
     def __init__(self):
-        raw_data_x = pd.read_csv("treated_dataset.csv")
+        raw_data_x = pd.read_csv("treated_dataset.csv").dropna()
         raw_data_x["BTC1"]
-        raw_data_y = pd.read_csv("treated_dataset.csv")
+        raw_data_y = pd.read_csv("treated_dataset.csv").dropna()
         raw_data_x = raw_data_x.drop("WIN", axis=1)
         raw_data_y = raw_data_y["WIN"]
 
